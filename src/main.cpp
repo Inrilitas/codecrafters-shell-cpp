@@ -53,12 +53,12 @@ int main() {
             case type:
                 input.erase(0,input.find(" ")+1);
                 if(isValid(input) != invalid){
-                    std::cout<<input<<"is a shell builin\n";
+                    std::cout<<input<<" is a shell builin\n";
                 }
                 else{
                     std::cout<<input<<" not found\n";
                 }
-
+                break;
             default:
                 std::cout<<input<<": command not found\n";
                 break;

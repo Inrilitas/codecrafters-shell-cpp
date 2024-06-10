@@ -7,6 +7,7 @@ enum validCommands
     echo,
     cd,
     exit0,
+    type,
     invalid,
 };
 
@@ -16,11 +17,12 @@ validCommands isValid(std::string command){
     if(command == "echo") return validCommands::echo;
     if(command == "cd") return validCommands::cd;
     if(command == "exit") return validCommands::exit0;
+    if(command == "type") return validCommands::type;
 
     return invalid;
 }
 
-std::string valid[3] = {"echo", "cd", "exit0"};
+std::string valid[4] = {"echo", "cd", "exit0"};
 
 int main() {
 
@@ -48,7 +50,14 @@ int main() {
             case exit0:
                 exit=true;
                 break;
-            
+            case type:
+                input.erase(0,input.find(" ")+1);
+                if(isValid(input) != invalid){
+                    std::cout<<input<<"is a shell builin\n";
+                }
+                else{
+                    std::cout<<input<<" not found\n";
+                }
 
             default:
                 std::cout<<input<<": command not found\n";

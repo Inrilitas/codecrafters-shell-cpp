@@ -39,7 +39,7 @@ std::string get_path(std::string command){
         string abs_path = path + '/' + command;
 
         if(filesystem::exists(abs_path)){
-            return abs_path
+            return abs_path;
         }
     }
     return "";  

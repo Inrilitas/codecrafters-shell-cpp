@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <filesystem>
 
+using namespace std;
 
 enum validCommands
 {
@@ -23,6 +26,24 @@ validCommands isValid(std::string command){
 }
 
 std::string valid[4] = {"echo", "cd", "exit0"};
+
+std::string get_path(std::string command){
+    std::string path_env = std::getenv("PATH");
+
+    std::stringstream ss(path_env);
+    std::string path;
+
+    while(!ss.eof()){
+        getline(ss, path, ':');
+
+        string abs_path = path + '/' + command;
+
+        if(filesystem::exists(abs_path)){
+            return abs_path
+        }
+    }
+    return "";  
+}
 
 int main() {
 
@@ -56,7 +77,14 @@ int main() {
                     std::cout<<input<<" is a shell builtin\n";
                 }
                 else{
-                    std::cout<<input<<" not found\n";
+                    std::string path = get_path(input);
+
+                    if(path.empty()){
+                        std::cout<<input<<" not found\n";
+                    }
+                    else{
+                        std::cout<<input<<" is "<<path<<std::endl;
+                    }
                 }
                 break;
             default:

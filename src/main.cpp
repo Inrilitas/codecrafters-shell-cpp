@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <filesystem>
+#include <stdio.h>
 
 using namespace std;
 
@@ -88,7 +89,30 @@ int main() {
                 }
                 break;
             default:
-                std::cout<<input<<": command not found\n";
+                // std::cout<<input<<": command not found\n";
+                string command = input.substr(0,input.find(" "));
+
+                string path = get_path(command);
+
+                if(path.empty()){
+                    std::cout<<input<<": command not found\n";
+                }
+                else{
+                    string full = path + input.substr(command.length());
+
+                    char buffer[128];
+                    string result;
+
+                    FILE *pipe = popen(full.c_str(), "r");
+
+                    while(!feof(pipe)){
+                        if(fgets(buffer, 128, pipe) != NULL){
+                            cout<<buffer;
+                        }
+                    }
+
+                    pclose(pipe);
+                }
                 break;
         }
     }

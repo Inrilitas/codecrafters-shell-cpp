@@ -76,7 +76,7 @@ int main() {
                     cwd = dir;
                 }   
                 else{
-                    std::cout<<"cd: "<<dir<<": No such file or directory.\n";
+                    std::cout<<dir<<": No such file or directory\n";
                 }
                 break;
                 }

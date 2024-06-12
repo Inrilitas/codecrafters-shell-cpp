@@ -73,6 +73,7 @@ int main() {
                 if(filesystem::is_directory(dir)){
                     // Change directory
                     filesystem::current_path(dir);
+                    cwd = dir;
                 }   
                 else{
                     std::cout<<"cd: "<<dir<<": No such file or directory.";

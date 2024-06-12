@@ -89,6 +89,7 @@ int main() {
                 break;
             case pwd:
                 std::cout<<cwd<<endl;
+                break;
             case type:
                 input.erase(0,input.find(" ")+1);
                 if(isValid(input) != invalid){

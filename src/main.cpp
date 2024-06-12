@@ -67,8 +67,18 @@ int main() {
 
         switch(isValid(input)){
             case cd:
+                {
+                string dir = input.substr(input.find(" ")+1); 
 
+                if(filesystem::is_directory(dir)){
+                    // Change directory
+                    filesystem::current_path(dir);
+                }   
+                else{
+                    std::cout<<"cd: "<<dir<<": No such file or directory.";
+                }
                 break;
+                }
             case echo:
                 input.erase(0,input.find(" ")+1);
                 std::cout<<input<<"\n";
@@ -95,7 +105,6 @@ int main() {
                 }
                 break;
             default:
-                // std::cout<<input<<": command not found\n";
                 string command = input.substr(0,input.find(" "));
 
                 string path = get_path(command);

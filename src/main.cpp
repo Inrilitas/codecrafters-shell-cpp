@@ -11,6 +11,7 @@ enum validCommands
     echo,
     cd,
     exit0,
+    pwd,
     type,
     invalid,
 };
@@ -22,11 +23,14 @@ validCommands isValid(std::string command){
     if(command == "cd") return validCommands::cd;
     if(command == "exit") return validCommands::exit0;
     if(command == "type") return validCommands::type;
+    if(command == "pwd") return validCommands::pwd;
 
     return invalid;
 }
 
-std::string valid[4] = {"echo", "cd", "exit0"};
+std::string valid[5] = {"echo", "cd", "exit0", "pwd", "type"};
+
+std::string cwd = filesystem::current_path().string();
 
 std::string get_path(std::string command){
     std::string path_env = std::getenv("PATH");
@@ -72,6 +76,8 @@ int main() {
             case exit0:
                 exit=true;
                 break;
+            case pwd:
+                std::cout<<cwd<<endl;
             case type:
                 input.erase(0,input.find(" ")+1);
                 if(isValid(input) != invalid){

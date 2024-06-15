@@ -73,7 +73,7 @@ int main() {
                 string dir = input.substr(input.find(" ")+1); 
 
                 if(dir=="~"){
-                    dir = HOME
+                    dir = HOME;
                 }
                 else if(!dir.starts_with('/')){
                     dir = cwd + '/' + dir;

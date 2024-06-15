@@ -70,10 +70,13 @@ int main() {
                 {
                 string dir = input.substr(input.find(" ")+1); 
 
+                if(!dir.starts_with('/')){
+                    dir = cwd + '/' + dir;
+                }
+
                 if(filesystem::is_directory(dir)){
                     // Change directory
-                    filesystem::current_path(dir);
-                    cwd = dir;
+                    cwd = filesystem::canonical(dir);
                 }   
                 else{
                     std::cout<<dir<<": No such file or directory\n";

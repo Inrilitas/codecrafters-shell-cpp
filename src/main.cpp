@@ -32,6 +32,8 @@ std::string valid[5] = {"echo", "cd", "exit0", "pwd", "type"};
 
 std::string cwd = filesystem::current_path().string();
 
+std::string HOME = getenv("HOME");
+
 std::string get_path(std::string command){
     std::string path_env = std::getenv("PATH");
 
@@ -70,7 +72,10 @@ int main() {
                 {
                 string dir = input.substr(input.find(" ")+1); 
 
-                if(!dir.starts_with('/')){
+                if(dir=="~"){
+                    dir = HOME
+                }
+                else if(!dir.starts_with('/')){
                     dir = cwd + '/' + dir;
                 }
 
